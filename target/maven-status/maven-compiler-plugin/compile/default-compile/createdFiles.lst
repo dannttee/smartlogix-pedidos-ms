@@ -1,0 +1,7 @@
+com\smartlogix\pedidos\service\PedidoService.class
+com\smartlogix\pedidos\controller\PedidoController.class
+com\smartlogix\pedidos\repository\PedidoRepository.class
+com\smartlogix\pedidos\model\EstadoPedido.class
+com\smartlogix\pedidos\model\Pedido$PedidoBuilder.class
+com\smartlogix\pedidos\model\Pedido.class
+com\smartlogix\pedidos\PedidosMsApplication.class
