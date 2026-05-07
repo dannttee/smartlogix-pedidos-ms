@@ -6,7 +6,6 @@ import com.smartlogix.pedidos.service.PedidoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,11 +14,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/pedidos")
 @CrossOrigin(origins = "*")
-@RequiredArgsConstructor
 @Tag(name = "Pedidos", description = "API de gestión de pedidos SmartLogix")
 public class PedidoController {
 
     private final PedidoService pedidoService;
+
+    public PedidoController(PedidoService pedidoService) {
+        this.pedidoService = pedidoService;
+    }
 
     @GetMapping
     @Operation(summary = "Listar todos los pedidos")

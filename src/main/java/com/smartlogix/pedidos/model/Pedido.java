@@ -2,15 +2,10 @@ package com.smartlogix.pedidos.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "pedidos")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class Pedido {
 
     @Id
@@ -48,6 +43,30 @@ public class Pedido {
 
     @Column(name = "fecha_pedido")
     private LocalDateTime fechaPedido;
+
+    public Pedido() {}
+
+    // Getters
+    public Long getId() { return id; }
+    public String getClienteNombre() { return clienteNombre; }
+    public Long getProductoId() { return productoId; }
+    public String getProductoNombre() { return productoNombre; }
+    public Integer getCantidad() { return cantidad; }
+    public Double getPrecioUnitario() { return precioUnitario; }
+    public Double getTotal() { return total; }
+    public EstadoPedido getEstado() { return estado; }
+    public LocalDateTime getFechaPedido() { return fechaPedido; }
+
+    // Setters
+    public void setId(Long id) { this.id = id; }
+    public void setClienteNombre(String clienteNombre) { this.clienteNombre = clienteNombre; }
+    public void setProductoId(Long productoId) { this.productoId = productoId; }
+    public void setProductoNombre(String productoNombre) { this.productoNombre = productoNombre; }
+    public void setCantidad(Integer cantidad) { this.cantidad = cantidad; }
+    public void setPrecioUnitario(Double precioUnitario) { this.precioUnitario = precioUnitario; }
+    public void setTotal(Double total) { this.total = total; }
+    public void setEstado(EstadoPedido estado) { this.estado = estado; }
+    public void setFechaPedido(LocalDateTime fechaPedido) { this.fechaPedido = fechaPedido; }
 
     @PrePersist
     public void prePersist() {
