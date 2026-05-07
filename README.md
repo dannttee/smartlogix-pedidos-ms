@@ -4,32 +4,42 @@ Microservicio de gestión de pedidos para SmartLogix. Permite crear, consultar, 
 
 ## Tecnologías
 - Java 17
-- Spring Boot
+- Spring Boot 3.2.5
 - Maven
 - MySQL
+- H2 Database
 
 ## Requisitos
 - Java 17 o superior
 - Maven o Maven Wrapper
-- MySQL en ejecución
-- Base de datos configurada para el proyecto
+- MySQL en ejecución si se usa el perfil `mysql`
+- Base de datos configurada para el perfil `mysql`
 
 ## Configuración
 Este microservicio se ejecuta en el puerto `8082`.
 
-Base de datos utilizada:
+Perfiles disponibles:
+- `dev`: usa H2 en memoria para desarrollo rápido.
+- `mysql`: usa MySQL local.
+
+Base de datos utilizada en MySQL:
 - Nombre: `smartlogix_pedidos`
 
 ## Instalación y ejecución
 
+### Con perfil de desarrollo
 ```bash
-./mvnw spring-boot:run
+java -jar target/pedidos-ms-1.0.0.jar --spring.profiles.active=dev
 ```
 
-En Windows PowerShell:
+### Con perfil MySQL
+```bash
+java -jar target/pedidos-ms-1.0.0.jar --spring.profiles.active=mysql
+```
 
+### Con Maven Wrapper en Windows PowerShell
 ```powershell
-.\mvnw.cmd spring-boot:run
+.\mvnw.cmd spring-boot:run -Dspring-boot.run.profiles=dev
 ```
 
 ## Endpoints disponibles
@@ -42,11 +52,21 @@ En Windows PowerShell:
 | PUT | /api/pedidos/{id} | Actualizar pedido |
 | DELETE | /api/pedidos/{id} | Eliminar pedido |
 
+## Accesos útiles
+
+- Swagger UI: `http://localhost:8082/swagger-ui.html`
+- H2 Console: `http://localhost:8082/h2-console`
+
+### Datos de acceso H2
+- JDBC URL: `jdbc:h2:mem:smartlogix_pedidos`
+- Usuario: `sa`
+- Contraseña: vacía
+
 ## Prueba rápida
-1. Levantar la base de datos MySQL.
-2. Ejecutar el microservicio.
-3. Probar los endpoints con Postman, Swagger o a través del BFF.
-4. Verificar que responde en `http://localhost:8082`.
+1. Ejecutar el microservicio con el perfil `dev`.
+2. Abrir Swagger o H2 Console.
+3. Probar los endpoints.
+4. Cuando quieras usar MySQL local, cambiar al perfil `mysql`.
 
 ## Autor
 Proyecto desarrollado para la asignatura **Desarrollo Fullstack III**.
