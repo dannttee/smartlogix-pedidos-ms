@@ -7,7 +7,7 @@ Microservicio de gestión de pedidos para SmartLogix. Permite crear, consultar, 
 - Spring Boot 3.2.5
 - Maven
 - MySQL
-- H2 Database
+- H2 Database (perfil dev)
 
 ## Requisitos
 - Java 17 o superior
@@ -27,7 +27,7 @@ Base de datos utilizada en MySQL:
 
 ## Instalación y ejecución
 
-### Con perfil de desarrollo
+### Con perfil de desarrollo (H2)
 ```bash
 java -jar target/pedidos-ms-1.0.0.jar --spring.profiles.active=dev
 ```
@@ -39,7 +39,20 @@ java -jar target/pedidos-ms-1.0.0.jar --spring.profiles.active=mysql
 
 ### Con Maven Wrapper en Windows PowerShell
 ```powershell
-.\mvnw.cmd spring-boot:run -Dspring-boot.run.profiles=dev
+# Perfil dev (H2)
+.\mvnw.cmd spring-boot:run "-Dspring-boot.run.profiles=dev"
+
+# Perfil mysql
+.\mvnw.cmd spring-boot:run "-Dspring-boot.run.profiles=mysql"
+```
+
+### Con Maven Wrapper en Bash / Linux / macOS
+```bash
+# Perfil dev (H2)
+./mvnw spring-boot:run -Dspring-boot.run.profiles=dev
+
+# Perfil mysql
+./mvnw spring-boot:run -Dspring-boot.run.profiles=mysql
 ```
 
 ## Endpoints disponibles
@@ -55,18 +68,27 @@ java -jar target/pedidos-ms-1.0.0.jar --spring.profiles.active=mysql
 ## Accesos útiles
 
 - Swagger UI: `http://localhost:8082/swagger-ui.html`
-- H2 Console: `http://localhost:8082/h2-console`
+- API Docs (JSON): `http://localhost:8082/api-docs`
+- H2 Console *(solo perfil dev)*: `http://localhost:8082/h2-console`
 
 ### Datos de acceso H2
 - JDBC URL: `jdbc:h2:mem:smartlogix_pedidos`
 - Usuario: `sa`
-- Contraseña: vacía
+- Contraseña: *(vacía)*
 
 ## Prueba rápida
 1. Ejecutar el microservicio con el perfil `dev`.
-2. Abrir Swagger o H2 Console.
-3. Probar los endpoints.
-4. Cuando quieras usar MySQL local, cambiar al perfil `mysql`.
+2. Abrir Swagger UI en `http://localhost:8082/swagger-ui.html`.
+3. Probar los endpoints disponibles.
+4. Para persistencia real, cambiar al perfil `mysql` y tener MySQL local en ejecución.
+
+## Estructura de perfiles
+
+| Archivo | Perfil | Base de datos |
+|--------|--------|--------------|
+| `application.properties` | (base) | Puerto, Swagger, nombre de la app |
+| `application-dev.properties` | `dev` | H2 en memoria |
+| `application-mysql.properties` | `mysql` | MySQL local (`smartlogix_pedidos`) |
 
 ## Autor
 Proyecto desarrollado para la asignatura **Desarrollo Fullstack III**.
